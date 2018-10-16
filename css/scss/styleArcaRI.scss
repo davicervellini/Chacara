@@ -1,0 +1,645 @@
+$corSistemaClaro:  #9ED892;
+$corSistema:       #6aa75e;
+$corSistemaEscuro: #2a5720;
+$corLabelSistema:  #3B3B3B;
+$urlLogo: "../../img/bkg-login.jpg";
+
+
+$larguraSideBar:    300px;
+$alturaMenu:         48px;
+$alturaCollapsible:  35px;
+$alturaIcons:        50px;
+$distanceTop:        50px;
+$containerDialogs:  500px;
+
+
+@mixin wrap-text{
+	text-overflow: ellipsis;
+	white-space:   nowrap;
+} 
+
+html, body {
+	width: 100%;
+}
+body{
+	background: url( $urlLogo )  !important;
+	background-attachment: fixed !important;
+}
+
+.side-nav{
+	width: $larguraSideBar;
+	a{
+		padding:0 16px;
+		font-size:14px;
+		font-weight:700;
+		line-height: $alturaMenu;
+		height:      $alturaMenu;
+		@include wrap-text;
+	}
+
+	li {
+		> a {
+			> i.material-icons{
+				margin: 0 16px 0 0;
+			}
+		}
+	}
+
+	.collapsible-body, &.fixed .collapsible-body{
+		background-color:transparent;
+	}
+	.collapsible-body li a, &.fixed .collapsible-body li a {
+		padding:0 23.5px 0 32px;
+	}
+
+}
+
+.side-nav > .logo-li, .userView{
+	height: $larguraSideBar / 2;
+}
+
+.logo-user{
+	position:absolute; 
+	top: 130px;
+	left:24px;
+	font-size:13px;
+}
+
+
+.collapsible-body {
+	> ul {
+		> li {
+			a {
+				height:      $alturaCollapsible;
+				line-height: $alturaCollapsible;
+				width:       $larguraSideBar !important;
+				overflow:      hidden; 
+				background:    #FFF;
+				@include wrap-text;
+			}
+		}
+	}
+}
+
+/* --- Nav --- */
+
+nav,.nav-wrapper,.nav-wrapper > ul li i{
+	height:      $alturaIcons;
+	line-height: $alturaIcons;
+}
+
+.navbar-dropdown {
+	margin-top: $distanceTop;
+	width: $larguraSideBar / 2 !important;
+	border-radius:2px;
+	padding:5px 0;
+	position:fixed;
+
+	li, li a { 
+		min-height:  30px;
+		height:      30px;
+		line-height: 20px;
+		color:       #000;
+		font-size:  .95em;	
+	}
+
+	li > a, > span{
+		padding:5px 0 0 10px;
+	}
+}
+
+/* --- Header / Main  --- */
+
+.header-main,.main{
+	margin-left: $larguraSideBar;
+}
+
+.header-double-height{
+	&:after{
+		@extend .background; 
+		height: $distanceTop;
+		top:48px;
+		content:'';
+		position:absolute;
+		display:block;
+		left:0;
+		right:0;
+	}
+}
+
+.main-content{
+	overflow:hidden;
+	margin-left: $larguraSideBar;
+	top:         $distanceTop;
+}
+
+.main{
+	margin-top: $distanceTop;
+}
+
+.dropMenu{
+	right:100px;
+}
+
+/* --- Preferencias --- */
+
+.background {
+	background-color: $corSistema;
+}
+
+.no-margin {
+	margin: 0 !important;
+}
+
+.no-bottom {
+	margin-bottom: 0;
+}
+
+.no-padding {
+	padding: 0 !important;
+}
+
+.right25 {
+	margin-right:25px;
+}
+
+.fixed {
+	position:fixed;
+	right:0;
+	left: 0;
+	top:  0;
+}
+
+.row{
+	position:relative;
+}
+
+.collection {
+	border:none
+}
+
+.container {
+	@media only screen and (min-width: 993px) {
+		width: 100%;
+	}
+
+	@media only screen and (min-width: 1441px) {
+		width: 85%;
+	}
+}
+
+/* --- Miscelaneo --- */
+
+.arrow-up {
+	width:0;
+	height:0;
+	border-left:  7px solid transparent;
+	border-right: 7px solid transparent;
+	border-bottom:7px solid #FFF;
+	margin-top:   -10px;
+	position:fixed;
+	right:50px;
+}
+
+.carregando {
+	position:fixed;
+	top:     0;
+	left:    0;
+	z-index: 1002;
+	width:   100vw;
+	height:  100vh;
+	display: -webkit-flex;
+	display: flex;
+	font-size:1.5rem;
+	-webkit-align-items:     center;
+	align-items:             center;
+	-webkit-justify-content: center;
+	justify-content:         center;
+}
+
+.bkload {
+	position:fixed;
+	top:0;
+	left:0;
+	z-index:1000;
+	background-color:#000;
+	width:100%;
+	height:100%;
+	opacity: .50;
+	filter: alpha(opacity=65);
+	margin:0;
+	padding:0;
+}
+
+.paginate_button{
+	padding: 8px 15px 8px 15px;
+	cursor: pointer;
+	margin-left:2px;
+
+	&:hover {
+		background:#E3E3E3;
+		border-radius:5px;
+	}
+}
+
+.current{
+	background: $corSistema;
+	border-radius:5px;
+	color:#FFF;
+	-webkit-box-shadow: 2px 1px 4px -2px rgba(0,0,0,0.75);
+	-moz-box-shadow:    2px 1px 4px -2px rgba(0,0,0,0.75);
+	box-shadow:         2px 1px 4px -2px rgba(0,0,0,0.75);
+
+	&:hover{
+		background: $corSistema;
+	}
+}
+
+
+/* -- Form -- */
+
+.dataTables_filter {
+	input {
+		width:200px;	
+	}
+} 
+.dataTable td, th{
+	padding:10px 5px;
+}
+
+
+.input-field {
+	label{
+		color: $corLabelSistema;
+	}
+
+	input[type=text]:focus + label, .input-field input[type=number]:focus + label {
+		color: $corSistema;
+	}
+
+	input[type=text]:focus, input[type=number]:focus, input[type=password]:focus, textarea.materialize-textarea:focus{
+		border-bottom: 1px solid $corSistema !important;
+		box-shadow: 0 1px 0 0 $corSistema !important;
+	}
+
+	input[type=text]{
+		&.valid{
+			border-bottom: 1px solid $corSistema;
+			box-shadow: 0 1px 0 0 $corSistema;	
+		}
+		
+		&.invalid{
+			border-bottom: 1px solid #F00;
+			box-shadow: 0 1px 0 0 #F00;
+		}
+	}
+
+	.prefix.active {
+		color: $corSistema;
+	}
+}
+
+.preloader-wrapper.big{
+	width: 32px;
+	height: 32px;
+}
+
+.login{
+	height: 3rem !important;
+}
+
+
+input:not([type]):focus:not([readonly]), 
+input[type=text]:focus:not([readonly]), 
+input[type=password]:focus:not([readonly]), 
+input[type=email]:focus:not([readonly]),
+input[type=url]:focus:not([readonly]), 
+input[type=time]:focus:not([readonly]), 
+input[type=date]:focus:not([readonly]), 
+input[type=datetime]:focus:not([readonly]),
+input[type=datetime-local]:focus:not([readonly]), 
+input[type=tel]:focus:not([readonly]), 
+input[type=number]:focus:not([readonly]), 
+input[type=search]:focus:not([readonly]), 
+textarea.materialize-textarea:focus:not([readonly]) {
+	border-bottom: 1px solid $corSistema;
+	box-shadow: 0 1px 0 0 $corSistema;	
+}
+
+input:not([type]), 
+input[type=text], 
+input[type=password], 
+input[type=email], 
+input[type=url], 
+input[type=time], 
+input[type=date], 
+input[type=datetime], 
+input[type=datetime-local],
+input[type=tel], 
+input[type=number], 
+input[type=search], 
+textarea.materialize-textarea{
+	height:2rem;
+	margin: 0 0 5px 0;
+}
+
+textarea.materialize-textarea{
+	min-height: 0;
+	padding: 0 0 1.6rem 0;
+}
+
+input:not([type]):focus:not([readonly])+label, 
+input[type=text]:focus:not([readonly])+label, 
+input[type=password]:focus:not([readonly])+label, 
+input[type=email]:focus:not([readonly])+label,
+input[type=url]:focus:not([readonly])+label, 
+input[type=time]:focus:not([readonly])+label, 
+input[type=date]:focus:not([readonly])+label, 
+input[type=datetime]:focus:not([readonly])+label, 
+input[type=datetime-local]:focus:not([readonly])+label, 
+input[type=tel]:focus:not([readonly])+label, 
+input[type=number]:focus:not([readonly])+label, 
+input[type=search]:focus:not([readonly])+label, 
+textarea.materialize-textarea:focus:not([readonly])+label{
+	@extend %corSistema;
+}
+
+label {
+	font-size:15px !important;
+}
+input {
+	height:35px !important;
+}
+
+[type='checkbox']:checked+label:before{
+    border-right: 2px solid $corSistema;
+    border-bottom: 2px solid $corSistema;
+}
+
+[type='checkbox'].filled-in:checked+label:after{
+	border: 2px solid #6aa75e !important;
+    background-color: #6aa75e !important;
+}
+
+[type='radio']:checked+label:after, 
+[type='radio'].with-gap:checked+label:before, 
+[type='radio'].with-gap:checked+label:after {
+	border: 2px solid $corSistema;
+}
+
+[type='radio']:checked+label:after, 
+[type='radio'].with-gap:checked+label:after {
+	background-color: $corSistema;
+}
+
+[type='radio']:checked+label:after, 
+[type='radio'].with-gap:checked+label:before, 
+[type='radio'].with-gap:checked+label:after {
+	border: 2px solid $corSistema;
+}
+
+input:not([type]):disabled + label, 
+input:not([type])[readonly="readonly"] + label, 
+input[type=text]:not(.browser-default):disabled + label, 
+input[type=text]:not(.browser-default)[readonly="readonly"] + label, 
+input[type=password]:not(.browser-default):disabled + label, 
+input[type=password]:not(.browser-default)[readonly="readonly"] + label, 
+input[type=email]:not(.browser-default):disabled + label, 
+input[type=email]:not(.browser-default)[readonly="readonly"] + label, 
+input[type=url]:not(.browser-default):disabled + label, 
+input[type=url]:not(.browser-default)[readonly="readonly"] + label, 
+input[type=time]:not(.browser-default):disabled + label, 
+input[type=time]:not(.browser-default)[readonly="readonly"] + label, 
+input[type=date]:not(.browser-default):disabled + label, 
+input[type=date]:not(.browser-default)[readonly="readonly"] + label,
+input[type=datetime]:not(.browser-default):disabled + label, 
+input[type=datetime]:not(.browser-default)[readonly="readonly"] + label,
+input[type=datetime-local]:not(.browser-default):disabled + label, 
+input[type=datetime-local]:not(.browser-default)[readonly="readonly"] + label, 
+input[type=tel]:not(.browser-default):disabled + label, 
+input[type=tel]:not(.browser-default)[readonly="readonly"] + label, 
+input[type=number]:not(.browser-default):disabled + label, 
+input[type=number]:not(.browser-default)[readonly="readonly"] + label,
+input[type=search]:not(.browser-default):disabled + label, 
+input[type=search]:not(.browser-default)[readonly="readonly"] + label, 
+textarea.materialize-textarea:disabled + label, 
+textarea.materialize-textarea[readonly="readonly"] + label{
+	color: rgba(0,0,0,0.40);
+}
+
+input[type=search]:not(.browser-default){
+	width: auto;
+	
+	&:focus{
+		width: auto;
+		border-bottom: 1px solid $corSistema;
+	 	box-shadow: 0 1px 0 0 $corSistema;		
+	}
+}
+
+.dropdown-content{
+	li {
+		min-height: 30px; 
+
+		> a, > span{
+			font-size: 14px;		
+		}
+
+		> span {
+			padding: 7px 8px;
+			color:#000;		
+		}
+	}
+}
+
+.modal-overlay{
+	z-index:999 !important;
+}
+
+.modal{
+	z-index:1003 !important;
+}
+
+.btn, .btn-large, .no-hover, .btn-floating{
+	&:hover {
+		background-color: $corSistemaEscuro;
+	}
+
+	&:focus{
+		background-color: $corSistema;
+	}
+}
+
+.color-text, .tabs .tab a:hover, .tabs .tab a.active{
+	color: $corSistema;
+}
+
+.tabs {
+	.tab a {
+		color: #9e9e9e;	
+	}
+
+	.indicator{
+		background-color: $corSistema;	
+	}
+}
+
+table.highlight>tbody>tr:hover, ul.highlight>li:hover{
+	background-color: $corSistema !important;
+	color:#FFF;
+}
+
+.tr-highlight{
+	transition: 0.2s all; 
+
+	&:hover{
+		background-color: $corSistema !important;
+		color:#FFF;
+	}
+}
+
+.pointer {
+	cursor: pointer;
+}
+
+.tr-active{
+	background-color: $corSistema !important;
+	color:#FFF;
+}
+
+
+
+.btn-card{
+	&:hover{
+		background-color: $corSistema;
+		color:#FFF;	
+	}
+}
+
+.switch label input[type=checkbox]:checked + .lever{
+	background-color: $corSistemaClaro;
+
+	&:after{
+		background-color: $corSistema;		
+	}
+}
+
+.desenvolvimento{
+	position:fixed; 
+	color:#F00;
+	font-weight:bold;
+	top:5px;
+	right:5px;
+	font-size: 20px;
+	z-index:9999;
+}
+
+.versao{
+	position:fixed; 
+	bottom:5px;
+	right:5px;
+	z-index:9999;
+}
+
+.colorGreen{
+	@extend %corSistema;
+}
+
+.progress{
+	background-color: $corSistemaClaro;
+
+	.indeterminate{
+		background-color: $corSistemaEscuro;
+	}
+}
+
+.jc-bs3-container.container{
+	width: $containerDialogs;
+}
+
+.tolower{
+	text-transform: lowercase !important;
+}
+
+.btn-dialog-width{
+	min-width:100px;
+}
+
+.stepper{
+	width:100%;
+
+	.step{
+
+		&:nth-child(odd){
+			position:relative;
+			margin-left:50%;
+
+			.step-legend:before{
+				right:-14px;
+			}
+
+			.step-content{
+				border-left:2px solid #e0e0e0;
+			}
+
+			.step-content, .step-legend{
+				padding-left: 35px;	
+			}
+		}
+
+		&:nth-child(even){
+			position:relative;
+			width:50%;
+
+			.step-legend:before{
+				left:-14px;
+			}
+
+			.step-content{
+				border-right:2px solid #e0e0e0;
+				margin-right:-2px;
+			}
+
+			.step-content, .step-legend{
+				text-align:right;
+				padding-right: 35px;
+			}
+		}
+
+		
+	}
+
+	.step-legend{
+		font-size: 1.2rem;
+		font-weight: bold;
+		position: relative;
+
+		&:before{
+			position: absolute;
+			font-family: 'Material Icons';
+			font-weight: normal;
+			font-style: normal;
+			font-size: 28px;
+			line-height: 1;
+			letter-spacing: normal;
+			text-transform: none;
+			display: inline-block;
+			white-space: nowrap;
+			word-wrap: normal;
+			direction: ltr;
+			-webkit-font-feature-settings: 'liga';
+			-webkit-font-smoothing: antialiased;
+			content: attr(data-icon);
+			color:#000;	
+		}
+	}
+}
+
+.pagination li.active {
+	background-color: #6aa75e;
+}
+/* --- Placeholders --- */
+%corSistema {
+	color: $corSistema !important;
+}
+
