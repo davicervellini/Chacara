@@ -113,10 +113,9 @@
 
 			$qry = $conn->prepare($sql);
 
-			foreach ($dados as $key => $value) {
-				$key = ":".$key;
-				$qry->bindParam($key, $value); 
-			}
+			foreach ($dados as $key => &$value) {
+				$qry->bindParam($key, $value);
+			}   
 
 			$qry->execute();
 		}
@@ -136,10 +135,11 @@
 			$sql = "UPDATE $table SET $updateDados WHERE $whereUpdate";
 
 			$qry = $conn->prepare($sql);
-			foreach ($dados as $key => $value) {
-				$key = ":".$key;
-				$qry->bindParam($key, $value); 
+			
+			foreach ($dados as $key => &$value) {
+				$qry->bindParam($key, $value);
 			}
+
 			$qry->execute();
 		}
 		
