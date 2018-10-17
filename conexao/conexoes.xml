@@ -1,34 +1,10 @@
 <sistema>
 	
-	<conexao nomeConexao="modulos" type="mysql">
-        <hostname>192.168.1.220</hostname>
-        <username>ArcaRI</username>
-        <password>@10ArcaRi</password>
-        <database>modulos</database>
-        <port>3306</port>
-    </conexao>
-<!-- 
-    <conexao nomeConexao="arcatdpj" type="sqlsrv">
-        <hostname>192.168.1.220</hostname>
-        <username>arcatdpj</username>
-        <password>@10ArcaTdpj</password>
-        <database>ARCATDPJ</database>
-        <port></port>
-    </conexao> -->
-
-    <conexao nomeConexao="arcatdpj" type="mysql">
-        <hostname>192.168.1.220</hostname>
-        <username>ArcaTDPJ</username>
-        <password>arca10tdpj@</password>
-        <database>arca_tdpj</database>
-        <port>3306</port>
-    </conexao>
-    
-    <conexao nomeConexao="versionamento" type="mysql">
-        <hostname>192.168.1.220</hostname>
-        <username>ArcaSGPA</username>
-        <password>@sgpa10arca</password>
-        <database>arca_sgpa</database>
+	<conexao nomeConexao="chacara" type="mysql">
+        <hostname>127.0.0.1</hostname>
+        <username>root</username>
+        <password></password>
+        <database>chacara</database>
         <port>3306</port>
     </conexao>
 

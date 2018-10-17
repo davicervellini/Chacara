@@ -6,7 +6,6 @@
 	require_once "config.php";
 	require_once "conexao/ConexaoMySQL.Class.php";
 	require_once "classes/autoload.php";
-	require_once "soap/ArcaTDPJ_WS/autoload.php";
 
 	$connMYSQL = new ConexaoMySQL();
 
@@ -154,16 +153,6 @@
 	</script>
 
 </head>
-<div class="desenvolvimento">
-	<?php
-		if(DEBUG){
-			print AMBIENTE . " - " . VERSION_FULL;
-		}else{
-			print VERSION_FULL;
-		}
-	?>
-</div>
-<!-- <div class="versao"><?php print $ver->getVersao( COD_CLIENTE ); ?></div> -->
 <body class="grey lighten-2" onload="getBloqueador()">
 
 <div class="carregando" style="display:none;">
@@ -205,128 +194,19 @@
 
 	<?php
 		require_once "classes/Menu.Class.php";
-  	$menu = new Menu('Atendimento', 'room_service');
-      $menu->append('Chamada',             './atendimento/chamada/',             'F_SenChamada');
-      $menu->append('Controle',            './atendimento/controle/',            'F_SenControle');
-      $menu->append('Relatório',           './atendimento/relatorio/',           'F_SenRelatorio');
-      $menu->append('Retirada',            './atendimento/retirada/',            'F_SenRetirada');
-    $menu->render();
-
-		$menu = new Menu('Balcão', 'insert_drive_file');
-			$menu->appendTitle('Devolução');
-				$menu->append('Certidão',    	   	 					 './balcao/devolucao-de-certidao/',						 		"F_BalDevCer", true);
-				$menu->append('Pessoas Jurídicas',    	   	 './balcao/devolucao-de-pessoas-juridicas/', 			"F_BalDevPes", true);
-				$menu->append('Títulos e Documentos',    	   './balcao/devolucao-de-titulos-e-documentos/', 		"F_BalDevTit", true);
-			$menu->appendTitle('Recepção');
-				$menu->append('Certidão',    	   	 					 './balcao/recepcao-de-certidao/',						 		"F_BalRecepCer", true);
-				$menu->append('Pessoas Jurídicas',    	   	 './balcao/recepcao-de-pessoas-juridicas/', 			"F_BalRecepPes", true);
-				$menu->append('Títulos e Documentos',    	   './balcao/recepcao-de-titulos-e-documentos/', 		"F_BalRecepTit", true);
-		$menu->render();
-
-		$menu = new Menu('Análise', 'insert_chart');
-				$menu->append('Títulos e Documentos',        	'./analise/analise-de-titulos-e-documentos/', 		'F_AnaTitEDoc');
-				$menu->append('Pessoas Jurídicas',	        	'./analise/analise-de-pessoas-juridicas/', 				'F_AnaPj');
-			$menu->appendTitle('Exigência');
-				$menu->append('Títulos e Documentos',        	'./analise/exigencias-de-titulos-e-documentos/', 		'F_AnaTitEDoc', true);
-				$menu->append('Pessoas Jurídicas',	        	'./analise/exigencias-de-pessoas-juridicas/', 				'F_AnaPj', true);
-
-
-			$menu->appendTitle('Baixas');
-				$menu->append('Pessoas Jurídicas',    	   	 './analise/baixas-de-pessoas-juridicas/', 				"F_AnaBaixasPes", true);
-				$menu->append('Títulos e Documentos',    	   './analise/baixas-de-titulos-e-documentos/', 			"F_AnaBaixasTit", true);
-		$menu->render();
-
-		$menu = new Menu('Notificação', 'notification_important');
-			$menu->appendTitle( 'Documentos Eletrônicos AR' );
-				$menu->append( 'Correio',  									'./notificacoes/correios', 									'F_NotDocCorreios',          			true );
-				$menu->append( 'Baixa',      								'./notificacoes/baixas',  				  				'F_NotDocBaixas', 								true );
-				$menu->append( 'Cadastro',   								'./notificacoes/cadastro',  			  				'F_NotDocCadastro', 							true );
-				$menu->append( 'Arquivo de Confirmação',    './notificacoes/arquivo-de-confirmacao',  	'F_NotDocArquivosDeConfirmacao', 	true );
-				$menu->append( 'Arquivo de Retorno',        './notificacoes/arquivo-de-retorno',  	    'F_NotDocArquivosDeRetorno', 			true );
-				$menu->append( 'Importação de Arquivo',     './notificacoes/importacao-de-arquivo',  		'F_NotDocImportacaoDeArquivo', 		true );
-				$menu->append( 'Registro de Arquivo',       './notificacoes/registro-de-arquivo',  			'F_NotDocRegistroDeArquivo', 			true );
-				$menu->append( 'Relatórios',        				'./notificacoes/relatorios',  							'F_NotDocRelatorios', 			    	true );
-			$menu->appendTitle( 'NT' );
-				$menu->append( 'Baixa', 										'./notificacoes/nt-baixa',  								'F_NotNtBaixa',  									true );
-				$menu->append( 'Relatórios',  							'./notificacoes/nt-relatorios',  						'F_NotNtRelatorios',  						true );
-			$menu->appendTitle( 'NI' );
-				$menu->append( 'Baixa',  										'./notificacoes/ni-baixa',  								'F_NotNiBaixa',  									true );
-				$menu->append( 'Relatórios',  							'./notificacoes/ni-relatorios',  						'F_NotNiRelatorios',  						true );
-		$menu->render();
-
-		$menu = new Menu('Certidão', 'book');
-			$menu->append('Análise/Baixas',        		 	 	'./certidao/analise-baixas/', 			'F_CerAnalise');
-			$menu->append('Consulta',        		 	 				'./certidao/consulta/', 						'F_CerConsulta');
-			$menu->append('Editor de Certidão',        		'./certidao/editor-de-certidao/', 	'F_CerEditCertidao');
-			$menu->append('Exigência',        						'./certidao/exigencia/', 						'F_CerExigencia');
-		$menu->render();
 
 		$menu = new Menu('Cadastros', 'library_add');
-			$menu->append('Checklist de Títulos', 				'./cadastros/checklist-titulos',		'F_CadQualificaTitulos');
-			$menu->append('Clientes', 										'./cadastros/clientes',		'F_CadClientes');
-			$menu->append('Diligência', 									'./cadastros/diligencia',	'F_CadDiligencia');
-			$menu->append('Feriados',                			'./cadastros/feriados/', 				'F_CadFeriados');
-			$menu->appendTitle('Macros');
-				$menu->append('Certidão',  							'./cadastros/macros-certidao/',      "F_CadMacrosCertidao", true);
-				$menu->append('Notificação',    	   				'./cadastros/macros-notificacao/', 	 "F_CadMacrosNotificacao", true);
-				$menu->append('Recibo',    	   							'./cadastros/macros-recibo/', 	 "F_CadMacrosRecibo", true);
-			$menu->appendTitle('Modelos');
-				$menu->append('Certidão',    	   				'./cadastros/modelos-certidao/', 		"F_CadModelosCertidao", true);
-				$menu->append('Exigências',    					'./cadastros/modelos-exigencia/', 		"F_CadModelosExigencia", true);
-				$menu->append('Notificação',    	   			'./cadastros/modelos-notificacao/', 	"F_CadModelosNotificacao", true);
-				$menu->append('Recibo',    	   					'./cadastros/modelos-recibo/', 			"F_CadModelosRecibo", true);
-			$menu->append('Naturezas',       		 					'./cadastros/naturezas', 			'F_CadNaturezas');
-			$menu->append('Ocorrências',       		 				'./cadastros/ocorrencias', 				'F_CadOcorrencias');
-			$menu->append('Qualidade das Partes',  				'./cadastros/qualidade-partes', 		'F_CadQualificaPartes');
-			$menu->append('Tabela de Custas',           	'./cadastros/tabela-custas/', 			"F_CadTabelaCustas");
+			// $menu->appendTitle('Modelos');
+			// 	$menu->append('Certidão',    	   				'./cadastros/modelos-certidao/', 		"F_CadModelosCertidao", true);
+			// 	$menu->append('Exigências',    					'./cadastros/modelos-exigencia/', 		"F_CadModelosExigencia", true);
+			// 	$menu->append('Notificação',    	   			'./cadastros/modelos-notificacao/', 	"F_CadModelosNotificacao", true);
+			// 	$menu->append('Recibo',    	   					'./cadastros/modelos-recibo/', 			"F_CadModelosRecibo", true);
 			$menu->append('Usuários',                			'./cadastros/usuarios/', 						"F_CadUsuarios");
-		$menu->render();
-
-		$menu = new Menu('Consulta', 'find_in_page');
-			$menu->append('Geral',                  			'./consulta/geral', 		'F_ConGeral');
-			$menu->append('Histórico',                  	    './consulta/historico',     'F_ConHistorico');
-			$menu->append('Indice',                  		    './consulta/indice/', 		'F_ConIndice');
-		$menu->render();
-
-		$menu->renderLink('Relatórios', 		'./relatorios/', 'assignment', 'F_NotasFiscais');
-
-		$menu = new Menu('Financeiro', 'monetization_on');
-			$menu->appendTitle('Caixa');
-				$menu->append('Fechamento Individual', 				'./financeiro/fechamento-individual/', 					'F_FechamentoIndividual', 			true);
-				$menu->append('Fechamento dos caixas', 				'./financeiro/fechamento-dos-caixas/', 					'F_FechamentoDosCaixas', 			true);
-				//$menu->append('Fechamento dos caixas (TD/PJ)', 		'./financeiro/fechamento-de-caixa-td-pj/', 				'', 								true);
-				//$menu->append('Fechamento dos caixas - Completo', 	'./financeiro/fechamento-de-caixa-completo/', 			'F_FechamentoDosCaixasCompleto', 	true);
-				$menu->append('Fundo de Caixa',      				'./financeiro/fundo-caixa', 							'F_FundoCaixa', 					true);
-				$menu->append('Movimento do Caixa',  				'./financeiro/movimento-de-caixa/', 					'F_MovimentoCaixa', 				true);
-				$menu->append('Ocorrências',         				'./financeiro/ocorrencias', 							'F_Ocorrencias', 					true);
-			$menu->appendTitle('Cheques');
-				$menu->append('Cheques com erro',   				'./financeiro/cheques/cheques-com-erro/',				'F_GedChequesEmitidos', 			true);
-				$menu->append('Emissão',    						'./financeiro/cheques/emissao/',  						'F_GedChequesEmissao', 				true);
-				$menu->append('Estorno',							'./financeiro/cheques/estorno/',						'F_GedChequesEstornados', 			true);
-				$menu->append('Recebidos',    						'./financeiro/cheques/recebidos/', 						'F_GedChequesRecebidos', 			true);
-				$menu->append('Relatórios',    						'./financeiro/cheques/relatorios/',						'F_GedChequesRelatorios', 			true);
-			$menu->appendTitle('Livro Caixa');
-				$menu->append('Abertura e Encerramento', 			'./financeiro/livro-caixa/abertura-e-encerramento/',  	'F_AberturaEncerramento',   		true);
-				$menu->append('Balanço',    						'./financeiro/livro-caixa/balanco/',  					'F_Balanco',						true);
-				$menu->append('Contas',    							'./financeiro/contas/',               					'F_Contas',							true);
-				$menu->append('Lançamentos',    					'./financeiro/lancamentos/',          					'F_Lancamentos',	 				true);
-				$menu->append('Relatório',    	    				'./financeiro/livro-caixa/relatorio/',					'F_RelatorioLivroCaixa',			true);
 		$menu->render();
 
 		$menu = new Menu('Ferramentas','settings');
 			$menu->append('Configurações', 							'./ferramentas/caminhos/',							'F_FerConfiguracoes');
-			$menu->append('Dados do Cartório',         	'./ferramentas/dados-cartorio/', 				'F_CadDadosCartorio');
-			$menu->append('Estorno de Baixas',      		'./ferramentas/estorno-de-baixas/',    	'F_FerEstornoBaixas');
-			$menu->append('Sequência de Protocolo',   	'./ferramentas/sequencia-protocolo/',  	'F_FerSeqProtocolo');
 			$menu->append('Variáveis do Sistema',     	'./ferramentas/variaveis-sistema/',  		'F_CadVariaveis');
-		$menu->render();
-
-		$menu = new Menu('GED', 'scanner');
-			$menu->append('Cadastro de Contas',     					'./gedi/contas/',       'F_GedCadContas');
-			$menu->append('Cadastro de Documentos', 					'./gedi/documentos/',   'F_GedCadDoumentos');
-			$menu->append('Cadastro de Setor',      					'./gedi/setor/',        'F_GedCadSetro');
-			$menu->append('Gerenciamento', 								'./gedi/gerenciamento/','F_GedGerenciamento');
-			$menu->append('Digitalização de Documentos',               './gedi/digitalizacao/', 'F_GedDigitalizacao');
 		$menu->render();
 
 		$menu = new Menu('Conta', 'person');
@@ -346,18 +226,7 @@
 		$routerContent->addRoutes(array(
 			array('GET','/ferramentas/[*]',				'/ferramentas/subrotas.php',	   ''),
 			array('GET','/cadastros/[*]',  				'/cadastros/subrotas.php', 			   ''),
-			array('GET', '/cadastros/confirmacao/[*]',	'/cadastros/confirmacao/subrotas.php', ''),	
-			array('GET','/consulta/[*]',  				'/consulta/subrotas.php', 			   ''),
-			array('GET','/balcao/[*]',  				'/balcao/subrotas.php', 			   ''),
-			array('GET','/analise/[*]',  				'/analise/subrotas.php', 			   ''),
-			array('GET','/certidao/[*]',  				'/certidao/subrotas.php', 			   ''),
 			array('GET','/alterar-senha/',  			'/alterarSenha.php', 				   ''),
-	    	array('GET','/atendimento/[*]',  			'/atendimento/subrotas.php', 		   ''),
-	    	array('GET','/notificacoes/[*]',  			'/notificacoes/subrotas.php', 		   ''),
-	    	array('GET','/relatorios/',  				'/relatorios/relatorios.php',		   ''),
-	    	array('GET','/relatorios/[*]',  			'/relatorios/subrotas.php',			   ''),
-	    	array('GET','/financeiro/[*]',  			'/financeiro/subrotas.php', 		   ''),
-	    	array('GET','/gedi/[*]',  					'/gedi/subrotas.php', 				   ''),
 			array('GET','/',  							'/paginaInicial.php', 				   ''),
 			array('GET','/home',  						'/paginaInicial.php', 				   ''),
 			array('GET','/home/',  						'/paginaInicial.php', 				   ''),

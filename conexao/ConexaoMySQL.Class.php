@@ -14,7 +14,7 @@
 	    private $amb;
 	    private $db;
 
-	    public function __construct($nomeConexao = 'arcatdpj'){
+	    public function __construct($nomeConexao = 'chacara'){
 
 	    	$conexoesXML = __DIR__ . "/conexoes.xml";
 			$xml = simplexml_load_file($conexoesXML);

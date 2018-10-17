@@ -23,26 +23,18 @@
 		ini_set("error_log", "logs/error.log");
 
 		$portServer  = $cfg["CFG_PORT"];
-		$rev = parse_ini_file("revision.ini");
-		$versionFull  = $rev["number_version"];
 	}else{
-		$portServer = '80';
+		$portServer = ':80';
 		$versionFull = "v1.0.0-trunk";
 		$ambiente    = "Ambiente de Desenvolvimento";
 		if(strpos($_SERVER["REQUEST_URI"], "Chacara/dev") > -1){
-			$rev = parse_ini_file("revision.ini");
-			$cfg["CFG_SVN_VERSION"] = $rev["revision"];
-			$versionFull            = $rev["number_version"]."-r".$rev["revision"];
-			$portServer             = ":91";
+			$portServer             = ":80";
 			$cfg["CFG_BASE_ROUTE"]  = "/Chacara/dev";
 			
 		}
 
 		if(strpos($_SERVER["REQUEST_URI"], "Chacara/preproducao") > -1){
-			$rev = parse_ini_file("revision.ini");
-			$cfg["CFG_SVN_VERSION"] = $rev["revision"];
-			$versionFull            = $rev["number_version"]."-r".$rev["revision"];
-			$portServer             = ":91";
+			$portServer             = ":80";
 			$cfg["CFG_BASE_ROUTE"]  = "/Chacara/preproducao";
 			$ambiente               = "Ambiente de Pré Produção";
 		}
@@ -61,19 +53,9 @@
 	ini_set("display_errors", 1);
 	if(!defined("BASE_ROUTE"))            define( "BASE_ROUTE",           $cfg["CFG_BASE_ROUTE"] );
 	if(!defined("IP_SERVER"))             define( "IP_SERVER",            $cfg["CFG_IP_SERVER"]);
-	// if(!defined("WS_INDISPONIBILIDADE"))  define( "WS_INDISPONIBILIDADE", $cfg["CFG_WS_INDISPONIBILIDADE"]);
-	if(!defined("SOCKET_CHAT_URL"))       define( "SOCKET_CHAT_URL",      $cfg["CFG_SOCKET_CHAT_URL"]);
-	// if(!defined("SOCKET_CHAT_URL"))       define( "SOCKET_CHAT_URL",      "http://localhost:3002");
-	if(!defined("URL_WS"))                define( "URL_WS",               $cfg["CFG_URL_WS"]);
-	// if(!defined("URL_WS_REGELETRONICO"))  define( "URL_WS_REGELETRONICO", $cfg["CFG_URL_WS_REGELETRONICO"]);
+	if(!defined("VERSION"))               define( "VERSION",              rand());
 	
 	// Predefinicoes
-	if(!defined("COD_CLIENTE"))           define( "COD_CLIENTE",          $cfg["CFG_COD_CLIENTE"]);
-	if(!defined("VERSION"))               define( "VERSION",              $cfg["CFG_SVN_VERSION"]);
-	if(!defined("VERSION_FULL"))          define( "VERSION_FULL",         $versionFull);
-	if(!defined("SERVENTIA_RI"))          define( "SERVENTIA_RI",         $cfg["CFG_SERVENTIA_RI"]);
-	if(!defined("SERVENTIA_TD"))          define( "SERVENTIA_TD",         $cfg["CFG_SERVENTIA_TD"]);
-	if(!defined("SERVENTIA_PJ"))          define( "SERVENTIA_PJ",         $cfg["CFG_SERVENTIA_PJ"]);
 	if(!defined("AMBIENTE"))              define( "AMBIENTE",             $ambiente );
 
 	set_time_limit(180);

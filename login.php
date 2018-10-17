@@ -64,16 +64,16 @@
 <body>
 <div class="row no-bottom " >
 	<div class="col l4 offset-l4 center-align " style='height:100px;text-align:center;padding-top:25px'>
-     	<!-- <img src="<?php print 'img/img001.png' ?>" alt="" style='height:100px'> -->
+     	<!-- <img src="<?php print 'img/logos/logoExemplo.png' ?>" alt="" style='height:100px'> -->
     </div>
 </div>
 	<div class="row main-login">
 		<div id="main" class="co grey lighten-4 z-depth-2" style='border-radius:4px;height:450px;margin-top:10px;width:400px; margin: 0 auto'>
 			
 			<div class="row no-bottom">
-				<div class="col l4 offset-l4 center-align " style='height:175px;text-align:center;padding-top:25px'>
+				<div class="col l4  center-align " style='height:175px;text-align:center;padding-top:25px'>
 	              <!-- <i class="material-icons" style='font-size:60px'>person_pin</i> -->
-	              <img src="<?php print 'img/img001.png' ?>" alt="" style='height:100px'>
+	              <img src="<?php print 'img/logos/logoExemplo.png' ?>" alt="" style='height:82px'>
 	            </div>
 			</div>
 			<div class="row">

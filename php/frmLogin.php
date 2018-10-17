@@ -7,9 +7,7 @@
 	$resp         = array();
 
 	require_once "../conexao/ConexaoMySQL.Class.php";
-	require_once "../conexao/ConexaoMySQL.Class.php";
 	require_once "../classes/autoload.php";
-	require_once "../soap/ArcaTDPJ_WS/ArcaTDPJ_WS.php";
 
 	$user = new Usuario;
 	$sys = new Sistema;
