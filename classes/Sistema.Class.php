@@ -46,9 +46,6 @@
 				$sDados = ["TABELA" => $tabela, "RECNO"  => $novoRecno];
 
 				$sql = $this->getInsert("recnos", $sDados);
-				die($sql);
-				$qry = $conn->prepare($sql);
-				$res = $qry->execute();
 				return 1;
 			}
 		}
@@ -70,9 +67,7 @@
 				try{
 					$sDados = ["RECNO" => ( $res + 1 )];
 
-					$sql = $this->getUpdate("recnos", " TABELA = '".$tabela."' ",  $sDados);
-					$qry = $conn->prepare($sql);
-					$res = $qry->execute();
+					$res = $this->getUpdate("recnos", " TABELA = '".$tabela."' ",  $sDados);
 					return $sDados['RECNO'];
 
 				}catch(Exception $e){
@@ -85,9 +80,7 @@
 
 				$result = $this->vStrings($sDados);
 
-				$sql = $this->getInsert("recnos", $sDados);
-				$qry = $conn->prepare($sql);
-				$res = $qry->execute();
+				$res = $this->getInsert("recnos", $sDados);
 				return 1;
 			}
 		}
@@ -102,7 +95,12 @@
 			return $strAux;
 		}
 
-		function getInsert($table, array $dados){
+		function getInsert($table, array $dados, $nomeConexao = ""){
+			if($nomeConexao == ''){
+				$conn = new ConexaoMySQL();
+			}else{
+				$conn = new ConexaoMySQL($nomeConexao);
+			}
 
 			$sql = "INSERT INTO $table ";
 			$fields = '';
@@ -111,23 +109,49 @@
 				$fields .= ($fields != "") ? ", " . str_replace(":","",$key) : str_replace(":", "" ,$key) ;
 				$binds  .= ($binds != "")  ? ", :" . $key : ":".$key;
 			}
-			return $sql . " ($fields) VALUES ($binds) ";
+			$sql = $sql . " ($fields) VALUES ($binds) ";
+
+			$qry = $conn->prepare($sql);
+
+			foreach ($dados as $key => $value) {
+				$key = ":".$key;
+				$qry->bindParam($key, $value); 
+			}
+
+			$qry->execute();
 		}
 
-		function getUpdate($table,$whereUpdate, $dados ){
-
+		function getUpdate($table,$whereUpdate, $dados, $nomeConexao = ""){
+			if($nomeConexao == ''){
+				$conn = new ConexaoMySQL();
+			}else{
+				$conn = new ConexaoMySQL($nomeConexao);
+			}
 			$fields      = "";
 			$updateDados = "";
 			foreach ($dados as $key => $value) {
 				$setUpdate = str_replace(':', "", $key) . ' = :' . $key;
 				$updateDados .= ($updateDados != "") ? ",".$setUpdate  : $setUpdate ;
 			}
+			$sql = "UPDATE $table SET $updateDados WHERE $whereUpdate";
 
-			return "UPDATE $table SET $updateDados WHERE $whereUpdate";
+			$qry = $conn->prepare($sql);
+			foreach ($dados as $key => $value) {
+				$key = ":".$key;
+				$qry->bindParam($key, $value); 
+			}
+			$qry->execute();
 		}
 		
-		function getDelete($table,$whereDelete){
-			return "DELETE FROM $table WHERE $whereDelete";
+		function getDelete($table,$whereDelete, $nomeConexao = ""){
+			if($nomeConexao == ''){
+				$conn = new ConexaoMySQL();
+			}else{
+				$conn = new ConexaoMySQL($nomeConexao);
+			}
+			$sql = "DELETE FROM $table WHERE $whereDelete";
+			$qry = $conn->prepare($sql);
+			$qry->execute();
 		}
 
 		function getSelect($table, array $dados, $where){
@@ -236,9 +260,7 @@
 	        try{
 
 	        	require_once __DIR__ . "/../config.php";
-				$sql = $this->getInsert('historico_log', $result);
-				$qry = $conn->prepare($sql);
-				$res = $qry->execute();
+				$res = $this->getInsert('historico_log', $result);
 	        	if($res != ''){
 	        		print 'Resposta: ' .$res;
 	        	}

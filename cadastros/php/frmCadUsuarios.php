@@ -31,9 +31,7 @@
 					];
 
 
-					$sql = $sys->getInsert("usuarios", $vDados);
-					$qry = $conn->prepare($sql);
-					$res = $qry->execute();
+					$res = $sys->getInsert("usuarios", $vDados);
 
 					$usu->inserirPermissoes($usuCod);
 					if($_SESSION["usuario"]["usuAdmin"] != 1) $usu->inserirPermissoesCopia($_SESSION["usuario"]["usuCodigo"],$usuCod);
@@ -72,9 +70,7 @@
 				$result = $sys->vStrings($vDados);
 				$camposCorrecao = $sys->select('usuarios', $vDados, array('USU_CODIGO'=>$usuCodigo), false); // Retorna o resultado antes do UPDATE
 
-				$sql = $sys->getUpdate("usuarios", "USU_CODIGO = ".$usuCodigo."" ,  $vDados);
-				$qry = $conn->prepare($sql);
-				$res = $qry->execute();
+				$res = $sys->getUpdate("usuarios", "USU_CODIGO = ".$usuCodigo."" ,  $vDados);
 
 				$resultado = $sys->identificarCorrecao($camposCorrecao, $vDados, false, false); // Identifica as diferenças entre o resultado antigo e o atual
 
@@ -96,9 +92,7 @@
 
 					$result = $sys->vStrings($vDados);
 					$camposCorrecao = $sys->select('permissao', $vDados, array('USU_CODIGO'=>$usuCodigo,'FORM'=>$key), false); // Retorna o resultado antes do UPDATE
-					$sql = $sys->getUpdate("permissao", "USU_CODIGO = ".$usuCodigo." AND FORM = '".$key."'" , $vDados);
-					$qry = $conn->prepare($sql);
-					$res = $qry->execute();
+					$res = $sys->getUpdate("permissao", "USU_CODIGO = ".$usuCodigo." AND FORM = '".$key."'" , $vDados);
 
 					$resultado .= $sys->identificarCorrecao($camposCorrecao, $vDados, false, false); // Identifica as diferenças entre o resultado antigo e o atual
 				}
@@ -117,9 +111,7 @@
 		case "exclusao":
 			try{
 
-				$sql = $sys->getDelete("usuarios", "USU_CODIGO = ".$usuCodigo." ");
-				$qry = $conn->prepare($sql);
-				$res = $qry->execute();
+				$res = $sys->getDelete("usuarios", "USU_CODIGO = ".$usuCodigo." ");
 
 				$sys->historico('CADASTRO DE USUÁRIOS', 'EXCLUIU O USUÁRIO - NOME: '.$usuNome.'; CÓDIGO: '.$usuCodigo.' ');
 				$resp["resposta"] = "Usuário excluído com sucesso!";
