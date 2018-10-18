@@ -17,7 +17,6 @@
 		case "inclusao":
 			try{
 					$usuCod = $sys->gera_codigo("usuarios");
-					die($usuCod);
 					$vDados = [
 						"USU_CODIGO"         => $usuCod,
 						"USU_NOME"           => $usuNome,
